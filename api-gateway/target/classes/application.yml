@@ -1,0 +1,21 @@
+server:
+  port: 8060
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      mvc:
+        routes:
+        - id: UserService
+          uri: lb://UserService
+          predicates:
+          - Path=/user/**
+        - id: HotelService
+          uri: lb://HotelService
+          predicates:
+          - Path=/hotel/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
